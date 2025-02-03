@@ -125,7 +125,8 @@ fi
 install_service() {
     echo "Installing NSSM service..."
     curl -sqL "$NSSM_URL" -o "$INSTALL_PATH/nssm.zip"
-    unzip -qo "$INSTALL_PATH/nssm.zip" -d "$INSTALL_PATH"
+    mkdir -p "$INSTALL_PATH/nssm"
+    unzip -qo "$INSTALL_PATH/nssm.zip" -d "$INSTALL_PATH/nssm"
     
     local service_name executable_path
     if [[ "$NO_ASTRO_LAUNCHER" == "true" ]]; then
@@ -156,7 +157,7 @@ run_directly() {
 
     stop_service "AstroServer"
     stop_service "AstroLauncher"
-    
+
     echo "Starting server directly..."
     if [[ "$NO_ASTRO_LAUNCHER" == "true" ]]; then
         "$INSTALL_PATH/Astroneer/AstroServer.exe"
